@@ -125,12 +125,12 @@ func GetTGBotAdminId() string {
 
 func GetOutputLog() string {
 
-	return runPath + "/bepusdt.log"
+	return runPath + "/data/bepusdt.log"
 }
 
 func GetDbPath() string {
 
-	return runPath + "/bepusdt.db"
+	return runPath + "/data/bepusdt.db"
 }
 
 func GetTemplatePath() string {
