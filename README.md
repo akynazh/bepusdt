@@ -5,10 +5,10 @@
 </p>
 <p align="center">
 <a href="https://www.gnu.org/licenses/gpl-3.0.html"><img src="https://img.shields.io/badge/license-GPLV3-blue" alt="license GPLV3"></a>
-<a href="https://golang.org"><img src="https://img.shields.io/badge/Golang-1.21-red" alt="Go version 1.21"></a>
+<a href="https://golang.org"><img src="https://img.shields.io/badge/Golang-1.22-red" alt="Go version 1.21"></a>
 <a href="https://github.com/gin-gonic/gin"><img src="https://img.shields.io/badge/Gin-v1.9-blue" alt="Gin Web Framework v1.9"></a>
 <a href="https://github.com/go-telegram-bot-api/telegram-bot-api"><img src="https://img.shields.io/badge/Telegram Bot-v5-lightgrey" alt="Golang Telegram Bot Api-v5"></a>
-<a href="https://github.com/v03413/bepusdt"><img src="https://img.shields.io/badge/Release-v1.5.13-green" alt="Release v1.5.13"></a>
+<a href="https://github.com/v03413/bepusdt"><img src="https://img.shields.io/badge/Release-v1.8.20-green" alt="Release v1.8.20"></a>
 </p>
 
 ## 🪧 介绍
@@ -24,6 +24,7 @@
 - ✅ 支持非订单交易监控通知，钱包余额变动及时通知
 - ✅ 机器人支持查询当前实时汇率，计算实际浮动汇率
 - ✅ 机器人支持任意地址查询 USDT、TRX余额等信息
+- ✅ 订单收款成功和余额变动通知 支持指定群组推送
 
 ## 🛠 参数配置
 
@@ -31,17 +32,21 @@ Bepusdt 所有参数都是以传递环境变量的方式进行配置，大部分
 
 ### 参数列表
 
-| 参数名称               | 默认值      | 用法说明                                                                                                                                          |
-|--------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| EXPIRE_TIME        | `600`    | 订单有效期，单位秒                                                                                                                                     |
-| USDT_RATE          | 空        | USDT汇率，默认留空则获取Okx交易所的汇率(每分钟同步一次)，支持多种写法，如：`7.4` 表示固定7.4、`～1.02`表示最新汇率上浮2%、`～0.97`表示最新汇率下浮3%、`+0.3`表示最新加0.3、`-0.2`表示最新减0.2，以此类推；如参数错误则使用固定值6.4 |
-| AUTH_TOKEN         | `123234` | 认证Token，对接会用到这个参数                                                                                                                             |
-| LISTEN             | `:8080`  | 服务器HTTP监听地址                                                                                                                                   |
-| TRADE_IS_CONFIRMED | `0`      | 是否需要网络确认，禁用可以提高回调速度，启用则可以防止交易失败                                                                                                               |
-| APP_URI            | 空        | 应用访问地址，留空则系统自动获取，前端收银台会用到，建议设置，例如：https://token-pay.example.com                                                                               |
-| WALLET_ADDRESS     | 空        | 启动时需要添加的钱包地址，多个请用半角符逗号`,`分开；当然，同样也支持通过机器人添加。                                                                                                  |
-| TG_BOT_TOKEN       | 无        | Telegram Bot Token，**必须设置**，否则无法使用                                                                                                            |
-| TG_BOT_ADMIN_ID    | 无        | Telegram Bot 管理员ID，**必须设置**，否则无法使用                                                                                                            |
+| 参数名称               | 默认值         | 用法说明                                                                                                                                          |
+|--------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| EXPIRE_TIME        | `600`       | 订单有效期，单位秒                                                                                                                                     |
+| USDT_RATE          | 空           | USDT汇率，默认留空则获取Okx交易所的汇率(每分钟同步一次)，支持多种写法，如：`7.4` 表示固定7.4、`～1.02`表示最新汇率上浮2%、`～0.97`表示最新汇率下浮3%、`+0.3`表示最新加0.3、`-0.2`表示最新减0.2，以此类推；如参数错误则使用固定值6.4 |
+| AUTH_TOKEN         | `123234`    | 认证Token，对接会用到这个参数                                                                                                                             |
+| LISTEN             | `:8080`     | 服务器HTTP监听地址                                                                                                                                   |
+| TRADE_IS_CONFIRMED | `0`         | 是否需要网络确认，禁用可以提高回调速度，启用则可以防止交易失败                                                                                                               |
+| APP_URI            | 空           | 应用访问地址，留空则系统自动获取，前端收银台会用到，建议设置，例如：https://token-pay.example.com                                                                               |
+| WALLET_ADDRESS     | 空           | 启动时需要添加的钱包地址，多个请用半角符逗号`,`分开；当然，同样也支持通过机器人添加。                                                                                                  |
+| TG_BOT_TOKEN       | 无           | Telegram Bot Token，**必须设置**，否则无法使用                                                                                                            |
+| TG_BOT_ADMIN_ID    | 无           | Telegram Bot 管理员ID，**必须设置**，否则无法使用                                                                                                            |
+| TG_BOT_GROUP_ID    | 无           | Telegram 群组ID，设置之后机器人会将交易消息会推送到此群                                                                                                             |
+| TRON_SERVER_API    | `TRON_SCAN` | 可选`TRON_SCAN`,`TRON_GRID`，推荐`TRON_GRID`和`TRON_GRID_API_KEY`搭配使用，*更准更强更及时*                                                                     |
+| TRON_SCAN_API_KEY  | 无           | TRONSCAN API KEY，如果收款地址较多推荐设置，可避免被官方QOS                                                                                                       |
+| TRON_GRID_API_KEY  | 无           | TRONGRID API KEY，如果收款地址较多推荐设置，可避免被官方QOS                                                                                                       |
 
 **Ps：所以综上所述，必须设置的参数有`TG_BOT_TOKEN TG_BOT_ADMIN_ID`，否则无法使用！**
 
@@ -58,6 +63,12 @@ Bepusdt 所有参数都是以传递环境变量的方式进行配置，大部分
 ### 如何获取参数 TG_BOT_ADMIN_ID
 
 Telegram 搜索`@userinfobot`机器人并启用，返回的ID就是`TG_BOT_ADMIN_ID`
+
+### 如何申请`TronScan`和`TronGrid`的ApiKey
+
+目前[TronScan](https://tronscan.org/)和[TronGrid](https://www.trongrid.io/)
+都可以通过邮箱注册，登录之后在用户中心创建一个ApiKey即可；默认免费套餐都是每天10W请求，对于个人收款绰绰有余。  
+**❗️最近发现TronScan接口不稳定且数据不及时，可以有条件的话都推荐使用TronGrid。**
 
 ## ⚠️ 特别注意
 

@@ -15,6 +15,8 @@ const defaultExpireTime = 600     // 订单默认有效期 10分钟
 const defaultUsdtRate = 6.4       // 默认汇率
 const defaultAuthToken = "123234" // 默认授权码
 const defaultListen = ":8080"     // 默认监听地址
+const TronServerApiScan = "TRON_SCAN"
+const TronServerApiGrid = "TRON_GRID"
 
 var runPath string
 
@@ -38,6 +40,51 @@ func GetExpireTime() time.Duration {
 	}
 
 	return defaultExpireTime
+}
+
+func GetUsdtRateRaw() string {
+	if data := help.GetEnv("USDT_RATE"); data != "" {
+
+		return strings.TrimSpace(data)
+	}
+
+	return ""
+}
+
+func GetTronServerApi() string {
+	if data := help.GetEnv("TRON_SERVER_API"); data != "" {
+
+		return strings.TrimSpace(data)
+	}
+
+	return ""
+}
+
+func GetTronScanApiKey() string {
+	if data := help.GetEnv("TRON_SCAN_API_KEY"); data != "" {
+
+		return strings.TrimSpace(data)
+	}
+
+	return ""
+}
+
+func GetTronGridApiKey() string {
+	if data := help.GetEnv("TRON_GRID_API_KEY"); data != "" {
+
+		return strings.TrimSpace(data)
+	}
+
+	return ""
+}
+
+func IsTronScanApi() bool {
+	if GetTronServerApi() == TronServerApiScan {
+
+		return true
+	}
+
+	return GetTronServerApi() != TronServerApiGrid
 }
 
 func GetUsdtRate() (string, decimal.Decimal, float64) {
@@ -121,6 +168,25 @@ func GetTGBotAdminId() string {
 	}
 
 	return ""
+}
+
+func GetTgBotGroupId() string {
+	if data := help.GetEnv("TG_BOT_GROUP_ID"); data != "" {
+
+		return strings.TrimSpace(data)
+	}
+
+	return ""
+}
+
+func GetTgBotNotifyTarget() string {
+	var groupId = GetTgBotGroupId()
+	if groupId != "" {
+
+		return groupId
+	}
+
+	return GetTGBotAdminId()
 }
 
 func GetOutputLog() string {

@@ -30,6 +30,7 @@ func init() {
 		{Command: "/" + cmdStart, Description: "开始使用"},
 		{Command: "/" + cmdUsdt, Description: "实时汇率"},
 		{Command: "/" + cmdWallet, Description: "钱包信息"},
+		{Command: "/" + cmdOrder, Description: "最近订单"},
 	}...))
 	if err != nil {
 		panic("TG Bot Request Error:" + err.Error())
@@ -46,6 +47,12 @@ func GetBotApi() *tgbotapi.BotAPI {
 }
 
 func SendMsg(msg tgbotapi.MessageConfig) {
+	if msg.ChatID != 0 {
+		_, _ = botApi.Send(msg)
+
+		return
+	}
+
 	var chatId, err = strconv.ParseInt(config.GetTGBotAdminId(), 10, 64)
 	if err == nil {
 		msg.ChatID = chatId
