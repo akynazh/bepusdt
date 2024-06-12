@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"fmt"
 	"github.com/google/uuid"
+	"github.com/joho/godotenv"
 	"os"
 	"regexp"
 	"sort"
@@ -27,7 +28,7 @@ func IsExist(path string) bool {
 }
 
 func GetEnv(key string) string {
-
+	_ = godotenv.Load()
 	return os.Getenv(key)
 }
 

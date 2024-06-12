@@ -13,10 +13,10 @@ func Start() {
 
 	listen := config.GetListen()
 	r := gin.New()
-	r.Static("/img", config.GetStaticPath()+"img")
-	r.Static("/css", config.GetStaticPath()+"css")
-	r.Static("/js", config.GetStaticPath()+"js")
-	r.LoadHTMLGlob(config.GetTemplatePath())
+	r.Static("/img", "./static/img")
+	r.Static("/css", "./static/img")
+	r.Static("/js", "./static/img")
+	r.LoadHTMLGlob("./templates/*")
 	r.Use(gin.LoggerWithWriter(log.GetWriter()), gin.Recovery())
 	r.Use(func(ctx *gin.Context) {
 		// 解析请求地址
@@ -30,8 +30,8 @@ func Start() {
 	})
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.html", gin.H{
-			"title": "一款更易用的USDT收款网关",
-			"url":   "https://github.com/v03413/bepusdt",
+			"title": "USDT PAY",
+			"url":   "https://t.me/zh_pay_bot",
 		})
 	})
 
@@ -81,7 +81,7 @@ func Start() {
 		orderRoute.POST("/create-transaction", CreateTransaction)
 	}
 
-	log.Info("Web启动 Listen: ", listen)
+	log.Info("Web 启动 Listen: ", listen)
 	err := r.Run(listen)
 	if err != nil {
 

@@ -19,6 +19,7 @@ const TronServerApiScan = "TRON_SCAN"
 const TronServerApiGrid = "TRON_GRID"
 
 var runPath string
+var dataPath string
 
 func init() {
 	execPath, err := os.Executable()
@@ -28,6 +29,12 @@ func init() {
 	}
 
 	runPath = filepath.Dir(execPath)
+	dataPath = runPath + "/data"
+	if _, err := os.Stat(dataPath); os.IsNotExist(err) {
+		if err := os.MkdirAll(dataPath, 0755); err != nil {
+			panic(err)
+		}
+	}
 }
 
 func GetExpireTime() time.Duration {
@@ -191,22 +198,12 @@ func GetTgBotNotifyTarget() string {
 
 func GetOutputLog() string {
 
-	return runPath + "/data/bepusdt.log"
+	return dataPath + "/bepusdt.log"
 }
 
 func GetDbPath() string {
 
-	return runPath + "/data/bepusdt.db"
-}
-
-func GetTemplatePath() string {
-
-	return runPath + "/templates/*"
-}
-
-func GetStaticPath() string {
-
-	return runPath + "/static/"
+	return dataPath + "/bepusdt.db"
 }
 
 func GetInitWalletAddress() []string {

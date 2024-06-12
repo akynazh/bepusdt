@@ -24,7 +24,7 @@ func BotStart(version string) {
 		return
 	}
 
-	telegram.SendWelcome(version)
+	//telegram.SendWelcome(version)
 
 	// 监听消息
 	for _u := range updates {

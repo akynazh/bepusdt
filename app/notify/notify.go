@@ -7,7 +7,6 @@ import (
 	"github.com/v03413/bepusdt/app/help"
 	"github.com/v03413/bepusdt/app/log"
 	"github.com/v03413/bepusdt/app/model"
-	"io"
 	"net/http"
 	"strings"
 	"time"
@@ -75,18 +74,18 @@ func OrderNotify(order model.TradeOrders) {
 		return
 	}
 
-	all, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Warn(fmt.Sprintf("订单回调失败(%v)：io.ReadAll(resp.Body) Error:", order.OrderId), err, order.OrderSetNotifyState(model.OrderNotifyStateFail))
+	//all, err := io.ReadAll(resp.Body)
+	//if err != nil {
+	//	log.Warn(fmt.Sprintf("订单回调失败(%v)：io.ReadAll(resp.Body) Error:", order.OrderId), err, order.OrderSetNotifyState(model.OrderNotifyStateFail))
+	//
+	//	return
+	//}
 
-		return
-	}
-
-	if string(all) != "ok" {
-		log.Warn(fmt.Sprintf("订单回调失败(%v)：body != ok (%s)", order.OrderId, string(all)), err, order.OrderSetNotifyState(model.OrderNotifyStateFail))
-
-		return
-	}
+	//if string(all) != "ok" {
+	//	log.Warn(fmt.Sprintf("订单回调失败(%v)：body != ok (%s)", order.OrderId, string(all)), err, order.OrderSetNotifyState(model.OrderNotifyStateFail))
+	//
+	//	return
+	//}
 
 	err = order.OrderSetNotifyState(model.OrderNotifyStateSucc)
 	if err != nil {
