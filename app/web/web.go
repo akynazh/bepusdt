@@ -1,8 +1,9 @@
 package web
 
 import (
+	"github.com/bytedance/sonic"
 	"github.com/gin-gonic/gin"
-	"github.com/goccy/go-json"
+	//"github.com/goccy/go-json"
 	"github.com/v03413/bepusdt/app/config"
 	"github.com/v03413/bepusdt/app/help"
 	"github.com/v03413/bepusdt/app/log"
@@ -56,7 +57,8 @@ func Start() {
 			}
 
 			m := make(map[string]any)
-			err = json.Unmarshal(_data, &m)
+			//err = json.Unmarshal(_data, &m)
+			err = sonic.Unmarshal(_data, &m)
 			if err != nil {
 				log.Error(err.Error())
 				ctx.JSON(400, gin.H{"error": err.Error()})
