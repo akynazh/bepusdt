@@ -18,7 +18,6 @@ import (
 const Version = "4.0.0"
 
 func main() {
-	fmt.Println("Bepusdt:" + Version)
 	if err := model.Init(); err != nil {
 
 		panic("数据库初始化失败：" + err.Error())
