@@ -31,7 +31,7 @@ func Start() {
 	})
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.html", gin.H{
-			"title": "USDT PAY",
+			"title": "皮卡数字商店",
 			"url":   "https://t.me/zh_pay_bot",
 		})
 	})
