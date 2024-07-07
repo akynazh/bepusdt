@@ -15,10 +15,10 @@ import (
 	"runtime"
 )
 
-// Version 版本号说明 1.0.0 代表主版本号.功能版本号.修订号
-const Version = "3.0.0"
+const Version = "4.0.0"
 
 func main() {
+	fmt.Println("Bepusdt:" + Version)
 	if err := model.Init(); err != nil {
 
 		panic("数据库初始化失败：" + err.Error())
