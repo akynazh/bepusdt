@@ -1,9 +1,9 @@
 package monitor
 
 import (
-	"github.com/v03413/bepusdt/app/log"
-	"github.com/v03413/bepusdt/app/model"
-	"github.com/v03413/bepusdt/app/notify"
+	"github.com/akynazh/bepusdt/app/log"
+	"github.com/akynazh/bepusdt/app/model"
+	"github.com/akynazh/bepusdt/app/notify"
 	"math"
 	"time"
 )

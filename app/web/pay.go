@@ -2,9 +2,9 @@ package web
 
 import (
 	"fmt"
+	"github.com/akynazh/bepusdt/app/log"
+	"github.com/akynazh/bepusdt/app/model"
 	"github.com/gin-gonic/gin"
-	"github.com/v03413/bepusdt/app/log"
-	"github.com/v03413/bepusdt/app/model"
 	"net/url"
 	"time"
 )

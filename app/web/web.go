@@ -4,9 +4,9 @@ import (
 	"github.com/bytedance/sonic"
 	"github.com/gin-gonic/gin"
 	//"github.com/goccy/go-json"
-	"github.com/v03413/bepusdt/app/config"
-	"github.com/v03413/bepusdt/app/help"
-	"github.com/v03413/bepusdt/app/log"
+	"github.com/akynazh/bepusdt/app/config"
+	"github.com/akynazh/bepusdt/app/help"
+	"github.com/akynazh/bepusdt/app/log"
 )
 
 func Start() {
@@ -15,8 +15,8 @@ func Start() {
 	listen := config.GetListen()
 	r := gin.New()
 	r.Static("/img", "./static/img")
-	r.Static("/css", "./static/img")
-	r.Static("/js", "./static/img")
+	r.Static("/css", "./static/css")
+	r.Static("/js", "./static/js")
 	r.LoadHTMLGlob("./templates/*")
 	r.Use(gin.LoggerWithWriter(log.GetWriter()), gin.Recovery())
 	r.Use(func(ctx *gin.Context) {

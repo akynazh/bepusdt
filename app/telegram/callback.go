@@ -2,12 +2,12 @@ package telegram
 
 import (
 	"fmt"
+	"github.com/akynazh/bepusdt/app/config"
+	"github.com/akynazh/bepusdt/app/help"
+	"github.com/akynazh/bepusdt/app/log"
+	"github.com/akynazh/bepusdt/app/model"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/tidwall/gjson"
-	"github.com/v03413/bepusdt/app/config"
-	"github.com/v03413/bepusdt/app/help"
-	"github.com/v03413/bepusdt/app/log"
-	"github.com/v03413/bepusdt/app/model"
 	"io"
 	"net/http"
 	"net/url"

@@ -1,8 +1,8 @@
 package log
 
 import (
+	"github.com/akynazh/bepusdt/app/config"
 	"github.com/sirupsen/logrus"
-	"github.com/v03413/bepusdt/app/config"
 	"io"
 	"os"
 )

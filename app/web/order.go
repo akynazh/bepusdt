@@ -2,12 +2,12 @@ package web
 
 import (
 	"fmt"
+	"github.com/akynazh/bepusdt/app/config"
+	"github.com/akynazh/bepusdt/app/help"
+	"github.com/akynazh/bepusdt/app/log"
+	"github.com/akynazh/bepusdt/app/model"
+	"github.com/akynazh/bepusdt/app/usdt"
 	"github.com/gin-gonic/gin"
-	"github.com/v03413/bepusdt/app/config"
-	"github.com/v03413/bepusdt/app/help"
-	"github.com/v03413/bepusdt/app/log"
-	"github.com/v03413/bepusdt/app/model"
-	"github.com/v03413/bepusdt/app/usdt"
 	"time"
 )
 

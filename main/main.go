@@ -6,10 +6,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/v03413/bepusdt/app/config"
-	"github.com/v03413/bepusdt/app/model"
-	"github.com/v03413/bepusdt/app/monitor"
-	"github.com/v03413/bepusdt/app/web"
+	"github.com/akynazh/bepusdt/app/config"
+	"github.com/akynazh/bepusdt/app/model"
+	"github.com/akynazh/bepusdt/app/monitor"
+	"github.com/akynazh/bepusdt/app/web"
 	"os"
 	"os/signal"
 	"runtime"
