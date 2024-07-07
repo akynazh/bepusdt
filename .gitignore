@@ -1,6 +1,7 @@
 tmp
 .idea
 .DS_Store
+.vscode
 /bepusdt
 /data
 .env*
