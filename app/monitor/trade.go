@@ -159,7 +159,9 @@ func handlePaymentTransactionForTronGrid(_lock map[string]model.TradeOrders, _to
 		var _createdAt = time.UnixMilli(transfer.Get("block_timestamp").Int())
 		if _createdAt.Unix() < _order.CreatedAt.Unix() || _createdAt.Unix() > _order.ExpiredAt.Unix() {
 			// 失效交易
-
+			if _order.OrderSetExpired() == nil {
+				go notify.OrderNotify(_order)
+			}
 			continue
 		}
 
