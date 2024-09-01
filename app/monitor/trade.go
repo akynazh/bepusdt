@@ -54,7 +54,7 @@ func TradeStart() {
 				recentTransferTotal = result.Get("meta.page_size").Num
 			}
 
-			log.Info(fmt.Sprintf("[%s] recent transfer total: %s(%v)", config.GetTronServerApi(), _row.Address, recentTransferTotal))
+			//log.Info(fmt.Sprintf("[%s] recent transfer total: %s(%v)", config.GetTronServerApi(), _row.Address, recentTransferTotal))
 			if recentTransferTotal <= 0 { // 没有交易记录
 
 				continue
@@ -82,6 +82,7 @@ func getAllPendingOrders() (map[string]model.TradeOrders, error) {
 	var _lock = make(map[string]model.TradeOrders) // 当前所有正在等待支付的订单 Lock Key
 	for _, order := range tradeOrders {
 		if time.Now().Unix() >= order.ExpiredAt.Unix() { // 订单过期
+			log.Info("订单过期：", order.OrderId)
 			err := order.OrderSetExpired()
 			if err != nil {
 				log.Error("订单过期标记失败：", err, order.OrderId)
@@ -128,6 +129,7 @@ func handlePaymentTransactionForTronScan(_lock map[string]model.TradeOrders, _to
 		var _transId = transfer.Get("transaction_id").String()
 		var _fromAddress = transfer.Get("from_address").String()
 		if _order.OrderSetSucc(_fromAddress, _transId, _createdAt) == nil {
+			log.Info("订单支付成功：", _order.OrderId)
 			// 通知订单支付成功
 			go notify.OrderNotify(_order)
 
@@ -166,6 +168,7 @@ func handlePaymentTransactionForTronGrid(_lock map[string]model.TradeOrders, _to
 		var _transId = transfer.Get("transaction_id").String()
 		var _fromAddress = transfer.Get("from").String()
 		if _order.OrderSetSucc(_fromAddress, _transId, _createdAt) == nil {
+			log.Info("订单支付成功：", _order.OrderId)
 			// 通知订单支付成功
 			go notify.OrderNotify(_order)
 
