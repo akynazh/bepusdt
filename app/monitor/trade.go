@@ -82,7 +82,6 @@ func getAllPendingOrders() (map[string]model.TradeOrders, error) {
 	var _lock = make(map[string]model.TradeOrders) // 当前所有正在等待支付的订单 Lock Key
 	for _, order := range tradeOrders {
 		if time.Now().Unix() >= order.ExpiredAt.Unix() { // 订单过期
-			log.Info("订单过期：", order.OrderId)
 			err := order.OrderSetExpired()
 			if err != nil {
 				log.Error("订单过期标记失败：", err, order.OrderId)
