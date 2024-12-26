@@ -36,3 +36,8 @@ TRON_GRID_API_KEY=xxx
 ```
 go build -v -o bepusdt ./main && pm2 restart bepusdt
 ```
+
+## TODO
+
+- [ ] Support callback api
+- [ ] Integrate store into telegram bot
